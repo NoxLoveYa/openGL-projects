@@ -31,7 +31,7 @@ unsigned int getTriangleVao(shape_t &shape)
 
 void Renderer::triangle()
 {
-    glUseProgram(SHAPES_SHADERS[TRIANGLE]);
+    glUseProgram(SHAPES_SHADERS[TRIANGLE].id);
     glBindVertexArray(SHAPES_VAO[TRIANGLE]);
     glDrawArrays(GL_TRIANGLES, 0, SHAPES_VERTICES[TRIANGLE].size / sizeof(float) / 2);
     glBindVertexArray(0);

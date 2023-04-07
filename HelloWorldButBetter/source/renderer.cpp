@@ -28,8 +28,11 @@ Renderer::Renderer()
     this->SHAPES_VERTICES.push_back({triangleVertices, sizeof(triangleVertices)});
     this->SHAPES_VERTICES.push_back({rectangleVertices, sizeof(rectangleVertices)});
 
-    this->SHAPES_SHADERS.push_back(getShaderProgram("source/shaders/source/simpleVertex.vert", "source/shaders/source/simpleFragment.frag"));
-    this->SHAPES_SHADERS.push_back(getShaderProgram("source/shaders/source/simpleVertex.vert", "source/shaders/source/simpleFragment.frag"));
+    Shader triangleShader("source/shaders/source/simpleVertex.vert", "source/shaders/source/simpleFragment.frag");
+    Shader rectangleShader("source/shaders/source/simpleVertex.vert", "source/shaders/source/simpleFragment.frag");
+
+    this->SHAPES_SHADERS.push_back(triangleShader);
+    this->SHAPES_SHADERS.push_back(rectangleShader);
 
     this->SHAPES_VAO.push_back(getTriangleVao(this->SHAPES_VERTICES[TRIANGLE]));
     this->SHAPES_VAO.push_back(getRectangleVAO(this->SHAPES_VERTICES[RECTANGLE]));

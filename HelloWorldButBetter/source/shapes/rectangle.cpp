@@ -38,7 +38,7 @@ unsigned int getRectangleVAO(shape_t &shape)
 
 void Renderer::rectangle()
 {
-    glUseProgram(SHAPES_SHADERS[RECTANGLE]);
+    glUseProgram(SHAPES_SHADERS[RECTANGLE].id);
     glBindVertexArray(SHAPES_VAO[RECTANGLE]);
     glDrawElements(GL_TRIANGLES, SHAPES_VERTICES[RECTANGLE].size / sizeof(float) / 2, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);

@@ -73,3 +73,17 @@ unsigned int getShaderProgram(char const *vertexShaderSourcePath, char const *fr
 
     return shaderProgram;
 }
+
+Shader::Shader(char const *vertexShaderSourcePath, char const *fragmentShaderSourcePath)
+{
+    this->id = getShaderProgram(vertexShaderSourcePath, fragmentShaderSourcePath);
+}
+
+Shader::~Shader()
+{
+}
+
+void Shader::use()
+{
+    glUseProgram(this->id);
+}

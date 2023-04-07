@@ -23,7 +23,7 @@ public:
 
     std::vector<shape_t> SHAPES_VERTICES;
     std::vector<unsigned int> SHAPES_VAO;
-    std::vector<unsigned int> SHAPES_SHADERS;
+    std::vector<Shader> SHAPES_SHADERS;
 
     void triangle();
     void rectangle();
