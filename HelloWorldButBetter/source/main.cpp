@@ -43,6 +43,8 @@ int main()
 
     Renderer ctx = Renderer();
 
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
     while (!glfwWindowShouldClose(window))
     {
         //process input
