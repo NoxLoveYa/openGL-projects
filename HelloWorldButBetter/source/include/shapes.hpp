@@ -21,6 +21,10 @@ enum SHAPES {
 };
 
 typedef struct {
+    float r, g, b;
+} color_t;
+
+typedef struct {
     float *vertices;
     int size;
 } shape_t;
