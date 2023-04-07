@@ -102,3 +102,18 @@ void Shader::setFloat(const std::string &name, float value) const
 {
     glUniform1f(glGetUniformLocation(this->id, name.c_str()), value);
 }
+
+void Shader::setColor(const std::string &name, Color color) const
+{
+    glUniform3f(glGetUniformLocation(this->id, name.c_str()), color.r, color.g, color.b);
+}
+
+Color rainbow(float time)
+{
+    float frequency = 0.5f;
+    Color color;
+    color.r = 0.5f + 0.5f * std::sin(frequency * time);
+    color.g = 0.5f + 0.5f * std::sin(frequency * time + 2.0f * M_PI / 3.0f);
+    color.b = 0.5f + 0.5f * std::sin(frequency * time + 4.0f * M_PI / 3.0f);
+    return color;
+}
