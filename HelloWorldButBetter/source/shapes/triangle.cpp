@@ -37,4 +37,5 @@ void Renderer::triangle()
     glUseProgram(SHAPES_SHADERS[TRIANGLE]);
     glBindVertexArray(SHAPES_VAO[TRIANGLE]);
     glDrawArrays(GL_TRIANGLES, 0, 3);
+    glBindVertexArray(0);
 }

@@ -17,7 +17,8 @@
 
 enum SHAPES {
     TRIANGLE = 0,
-    SQUARE
+    RECTANGLE
 };
 
 unsigned int getTriangleVao();
+unsigned int getRectangleVAO();

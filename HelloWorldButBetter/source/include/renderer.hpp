@@ -25,4 +25,5 @@ public:
     std::vector<unsigned int> SHAPES_SHADERS;
 
     void triangle();
+    void rectangle();
 };
