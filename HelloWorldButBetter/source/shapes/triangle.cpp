@@ -7,14 +7,8 @@
 
 #include "../include/main.hpp"
 
-unsigned int getTriangleVao()
+unsigned int getTriangleVao(shape_t &shape)
 {
-    float vertices[] = {
-            -0.5f, -0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            0.0f, 0.5f, 0.0f
-    };
-
     unsigned int VBO, VAO;
 
     glGenVertexArrays(1, &VAO);
@@ -24,7 +18,7 @@ unsigned int getTriangleVao()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
     //copy vertices array in a buffer for OpenGL to use
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, shape.size, shape.vertices, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
@@ -36,6 +30,6 @@ void Renderer::triangle()
 {
     glUseProgram(SHAPES_SHADERS[TRIANGLE]);
     glBindVertexArray(SHAPES_VAO[TRIANGLE]);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_TRIANGLES, 0, SHAPES_VERTICES[TRIANGLE].size / sizeof(float) / 2);
     glBindVertexArray(0);
 }

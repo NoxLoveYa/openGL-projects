@@ -20,5 +20,10 @@ enum SHAPES {
     RECTANGLE
 };
 
-unsigned int getTriangleVao();
-unsigned int getRectangleVAO();
+typedef struct {
+    float *vertices;
+    int size;
+} shape_t;
+
+unsigned int getTriangleVao(shape_t &shape);
+unsigned int getRectangleVAO(shape_t &shape);

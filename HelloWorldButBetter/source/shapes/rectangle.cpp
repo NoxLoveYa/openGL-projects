@@ -7,14 +7,8 @@
 
 #include "../include/main.hpp"
 
-unsigned int getRectangleVAO()
+unsigned int getRectangleVAO(shape_t &shape)
 {
-    float vertices[] = {
-        0.5f, 0.5f, 0.0f, // top right
-        0.5f, -0.5f, 0.0f, // bottom right
-        -0.5f, -0.5f, 0.0f, // bottom left
-        -0.5f, 0.5f, 0.0f // top left
-    };
     unsigned int indices[] = {
         0, 1, 3, // first triangle
         1, 2, 3 // second triangle
@@ -28,7 +22,7 @@ unsigned int getRectangleVAO()
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, shape.size, shape.vertices, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
@@ -43,6 +37,6 @@ void Renderer::rectangle()
 {
     glUseProgram(SHAPES_SHADERS[RECTANGLE]);
     glBindVertexArray(SHAPES_VAO[RECTANGLE]);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, SHAPES_VERTICES[RECTANGLE].size / sizeof(float) / 2, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
