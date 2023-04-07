@@ -12,6 +12,7 @@
 #include <sstream>
 #include <string>
 #include <cstring>
+#include <cmath>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 

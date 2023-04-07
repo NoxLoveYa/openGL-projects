@@ -28,7 +28,13 @@ unsigned int getTriangleVao(shape_t &shape)
 
 void Renderer::triangle()
 {
+    float timeValue = glfwGetTime();
+    float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+    float redValue = (sin(timeValue) / 4.0f) + 0.5f;
+    float blueValue = (sin(timeValue) / 3.0f) + 0.5f;
+    int vertexColorLocation = glGetUniformLocation(SHAPES_SHADERS[TRIANGLE], "vertexColor");
     glUseProgram(SHAPES_SHADERS[TRIANGLE]);
+    glUniform4f(vertexColorLocation, redValue, greenValue, blueValue, 1.f);
     glBindVertexArray(SHAPES_VAO[TRIANGLE]);
     glDrawArrays(GL_TRIANGLES, 0, SHAPES_VERTICES[TRIANGLE].size / sizeof(float) / 2);
     glBindVertexArray(0);
