@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** HelloWorld
 ** File description:
-** shaders
+** shapes
 */
 
 #pragma once
@@ -15,8 +15,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-static std::vector<unsigned int> *SHAPES_SHADERS = new std::vector<unsigned int>;
+enum SHAPES {
+    TRIANGLE = 0,
+    SQUARE
+};
 
-unsigned int getShaderProgram(char const *vertexShaderSourcePath, char const *fragmentShaderSourcePath);
-
-void initShaders();
+unsigned int getTriangleVao();

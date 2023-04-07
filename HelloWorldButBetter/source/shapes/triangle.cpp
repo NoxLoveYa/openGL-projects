@@ -10,16 +10,16 @@
 unsigned int getTriangleVao()
 {
     float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.0f, 0.5f, 0.0f
+            -0.5f, -0.5f, 0.0f,
+            0.5f, -0.5f, 0.0f,
+            0.0f, 0.5f, 0.0f
     };
 
     unsigned int VBO, VAO;
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
-    
+
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
@@ -32,9 +32,9 @@ unsigned int getTriangleVao()
     return VAO;
 }
 
-void renderTriangle()
+void Renderer::triangle()
 {
-    glUseProgram((*SHAPES_SHADERS)[TRIANGLE]);
-    glBindVertexArray((*SHAPES_VAO)[TRIANGLE]);
+    glUseProgram(SHAPES_SHADERS[TRIANGLE]);
+    glBindVertexArray(SHAPES_VAO[TRIANGLE]);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }

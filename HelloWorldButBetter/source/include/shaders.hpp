@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2023
-** HelloWorld
+** HelloWorldButBetter
 ** File description:
-** main
+** shaders
 */
 
 #pragma once
@@ -11,11 +11,8 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <cstring>
+#include <vector>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "callbacks.hpp"
-#include "files.hpp"
-#include "shapes.hpp"
-#include "shaders.hpp"
+unsigned int getShaderProgram(char const *vertexShaderSourcePath, char const *fragmentShaderSourcePath);

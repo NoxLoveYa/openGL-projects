@@ -17,5 +17,6 @@
 
 #include "callbacks.hpp"
 #include "files.hpp"
-#include "shapes.hpp"
 #include "shaders.hpp"
+#include "shapes.hpp"
+#include "renderer.hpp"

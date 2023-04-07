@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2023
-** HelloWorld
+** HelloWorldButBetter
 ** File description:
 ** shaders
 */
@@ -27,7 +27,7 @@ unsigned int getShaderProgram(char const *vertexShaderSourcePath, char const *fr
     glCompileShader(SBO);
     glCompileShader(FBO);
 
-    //chcek for errors
+    //check for errors
     int success;
     char infoLog[512];
 
@@ -36,7 +36,7 @@ unsigned int getShaderProgram(char const *vertexShaderSourcePath, char const *fr
     {
         glGetShaderInfoLog(SBO, 512, NULL, infoLog);
         std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" <<
-        infoLog << std::endl;
+                  infoLog << std::endl;
     }
 
     glGetShaderiv(FBO, GL_COMPILE_STATUS, &success);
@@ -44,10 +44,10 @@ unsigned int getShaderProgram(char const *vertexShaderSourcePath, char const *fr
     {
         glGetShaderInfoLog(FBO, 512, NULL, infoLog);
         std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" <<
-        infoLog << std::endl;
+                  infoLog << std::endl;
     }
 
-     //create shader program
+    //create shader program
     unsigned int shaderProgram;
     shaderProgram = glCreateProgram();
 
@@ -64,7 +64,7 @@ unsigned int getShaderProgram(char const *vertexShaderSourcePath, char const *fr
     {
         glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
         std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" <<
-        infoLog << std::endl;
+                  infoLog << std::endl;
     }
 
     //delete shaders
@@ -72,10 +72,4 @@ unsigned int getShaderProgram(char const *vertexShaderSourcePath, char const *fr
     glDeleteShader(FBO);
 
     return shaderProgram;
-}
-
-void initShaders()
-{
-    SHAPES_SHADERS->push_back(getShaderProgram("source/shaders/source/simpleVertex.vert", "source/shaders/source/simpleFragment.frag"));
-    SHAPES_SHADERS->push_back(getShaderProgram("source/shaders/source/simpleVertex.vert", "source/shaders/source/simpleFragment.frag"));
 }

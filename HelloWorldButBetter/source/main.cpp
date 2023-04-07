@@ -41,10 +41,7 @@ int main()
 
     register_callbacks(window);
 
-    initShapesVao();
-    initShaders();
-
-    std::cout << "Hello World: " << SHAPES_VAO->size() << std::endl;
+    Renderer ctx = Renderer();
 
     while (!glfwWindowShouldClose(window))
     {
@@ -54,6 +51,7 @@ int main()
         //rendering commands here
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+        ctx.triangle();
 
         //check and call events and swap the buffers to prevent flickering
         glfwSwapBuffers(window);
