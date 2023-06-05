@@ -44,4 +44,5 @@ public:
 
     void triangle();
     void rectangle();
+    void cube();
 };

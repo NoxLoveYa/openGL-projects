@@ -22,7 +22,8 @@ typedef struct {
 typedef struct shader_s shader_t;
 
 enum SHADERS {
-    FLAT = 0,
+    FLAT2D = 0,
+    FLAT3D,
 };
 
 class Shader

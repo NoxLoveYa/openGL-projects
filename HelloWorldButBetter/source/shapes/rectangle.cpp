@@ -41,12 +41,12 @@ unsigned int getRectangleVAO(shape_t &shape)
 
 void Renderer::rectangle()
 {
-    glUseProgram(this->SHADERS[FLAT].shader.id);
-    this->SHADERS[FLAT].shader.setColor("Color", rainbow(glfwGetTime()));
+    this->SHADERS[FLAT2D].shader.use();
+    this->SHADERS[FLAT2D].shader.setColor("Color", rainbow(glfwGetTime()));
     glm::mat4 trans = glm::mat4(1.0f);
     trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
     trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-    this->SHADERS[TRIANGLE].shader.setTransform("transform", trans);
+    this->SHADERS[FLAT2D].shader.setTransform("transform", trans);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, TEXTURES[WOOD_CONTAINER]);
     glBindVertexArray(SHAPES_VAO[RECTANGLE]);

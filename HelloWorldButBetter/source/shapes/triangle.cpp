@@ -34,8 +34,8 @@ unsigned int getTriangleVao(shape_t &shape)
 
 void Renderer::triangle()
 {
-    glUseProgram(this->SHADERS[FLAT].shader.id);
-    this->SHADERS[FLAT].shader.setColor("Color", (Color){1.0f, 1.0f, 1.0f});
+    glUseProgram(this->SHADERS[FLAT2D].shader.id);
+    this->SHADERS[FLAT2D].shader.setColor("Color", (Color){1.0f, 1.0f, 1.0f});
     glm::mat4 trans = glm::mat4(1.0f);
     trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
     trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
