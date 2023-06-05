@@ -13,7 +13,7 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
-out vec3 color;
+out vec3 fragColor;
 out vec3 lightColor;
 
 out vec3 lightPos;
@@ -29,7 +29,7 @@ void main()
 {
     gl_Position = projection * view * model * vec4(aPos, 1.0);
 
-    color = Color;
+    fragColor = Color;
     lightColor = LightColor;
 
     lightPos = LightPos;

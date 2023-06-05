@@ -7,12 +7,12 @@ uniform vec3 Color;
 
 uniform mat4 transform;
 
-out vec3 ourColor;
+out vec3 fragColor;
 out vec2 TexCoord;
 
 void main()
 {
     gl_Position = transform * vec4(aPos.xyz, 1.0);
-    ourColor = Color;
+    fragColor = Color;
     TexCoord = aTexCoord;
 }

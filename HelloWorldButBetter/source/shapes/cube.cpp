@@ -31,7 +31,7 @@ unsigned int getCubeVAO(shape_t &shape)
     return VAO;
 }
 
-void Renderer::cube(glm::vec3 Position, glm::vec3 lightPosition, Color color, Color light_color, Shader shader)
+void Renderer::cube(glm::vec3 Position, float scale, glm::vec3 lightPosition, Color color, Color light_color, Shader shader)
 {
     shader.use();
 
@@ -47,8 +47,7 @@ void Renderer::cube(glm::vec3 Position, glm::vec3 lightPosition, Color color, Co
     glm::mat4 projection = glm::mat4(1.0f);
 
     model = glm::translate(model, Position);
-    if (shader.id == this->SHADERS[FLAT_LIGHT].shader.id)
-        model = glm::scale(model, glm::vec3(0.2f));
+    model = glm::scale(model, glm::vec3(scale));
 
     view = glm::lookAt(this->cameraPos, this->cameraPos + this->cameraFront, this->cameraUp);
 

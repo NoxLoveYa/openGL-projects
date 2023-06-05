@@ -57,5 +57,5 @@ public:
 
     void triangle();
     void rectangle();
-    void cube(glm::vec3 Position, glm::vec3 lightPosition, Color color, Color light_color, Shader shader);
+    void cube(glm::vec3 Position, float scale, glm::vec3 lightPosition, Color color, Color light_color, Shader shader);
 };

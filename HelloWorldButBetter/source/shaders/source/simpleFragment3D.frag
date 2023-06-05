@@ -1,6 +1,6 @@
 #version 330 core
 
-in vec3 color;
+in vec3 fragColor;
 in vec3 lightColor;
 
 in vec3 lightPos;
@@ -18,6 +18,8 @@ uniform sampler2D Texture;
 
 void main()
 {
+    vec3 outlineColor = vec3(0, 0, 0);
+
     float ambientStrength = 0.1;
     float specularStrength = 0.5;
 
@@ -34,7 +36,7 @@ void main()
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
     vec3 specular = specularStrength * spec * lightColor;
 
-    vec3 result = (ambient + diffuse + specular) * color;
+    vec3 result = (ambient + diffuse + specular) * fragColor;
 
     FragColor = texture(Texture, texCoord) * vec4(result, 1.0);
 }

@@ -25,6 +25,7 @@ enum SHADERS {
     FLAT2D = 0,
     FLAT3D,
     FLAT_LIGHT,
+    FLAT_OUTLINE
 };
 
 class Shader
