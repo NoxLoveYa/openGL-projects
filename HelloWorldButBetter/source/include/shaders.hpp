@@ -19,6 +19,8 @@ typedef struct {
     float r, g, b;
 } Color;
 
+typedef struct shader_s shader_t;
+
 class Shader
 {
 public:

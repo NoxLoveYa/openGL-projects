@@ -27,6 +27,7 @@ typedef struct {
 typedef struct {
     float *vertices;
     int size;
+    float *texCoords;
 } shape_t;
 
 unsigned int getTriangleVao(shape_t &shape);

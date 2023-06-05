@@ -31,8 +31,8 @@ unsigned int getTriangleVao(shape_t &shape)
 
 void Renderer::triangle()
 {
-    glUseProgram(SHAPES_SHADERS[TRIANGLE].id);
-    SHAPES_SHADERS[TRIANGLE].setColor("Color", rainbow(glfwGetTime()));
+    glUseProgram(SHADERS[0].shader.id);
+    SHADERS[0].shader.setColor("Color", rainbow(glfwGetTime()));
     glBindVertexArray(SHAPES_VAO[TRIANGLE]);
     glDrawArrays(GL_TRIANGLES, 0, SHAPES_VERTICES[TRIANGLE].size / sizeof(float) / 2);
     glBindVertexArray(0);

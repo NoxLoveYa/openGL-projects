@@ -15,6 +15,22 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+typedef struct shader_s {
+    const char *id;
+    Shader shader;
+} shader_t;
+
+class RectangleShape
+{
+public:
+    RectangleShape();
+    ~RectangleShape();
+
+    shape_t vertices;
+    int vao;
+    shader_t shader;
+};
+
 class Renderer
 {
 public:
@@ -23,7 +39,7 @@ public:
 
     std::vector<shape_t> SHAPES_VERTICES;
     std::vector<unsigned int> SHAPES_VAO;
-    std::vector<Shader> SHAPES_SHADERS;
+    std::vector<shader_t> SHADERS;
 
     void triangle();
     void rectangle();
