@@ -17,7 +17,8 @@
 
 enum SHAPES {
     TRIANGLE = 0,
-    RECTANGLE
+    RECTANGLE,
+    CUBE
 };
 
 typedef struct {
@@ -32,3 +33,4 @@ typedef struct {
 
 unsigned int getTriangleVao(shape_t &shape);
 unsigned int getRectangleVAO(shape_t &shape);
+unsigned int getCubeVAO(shape_t &shape);

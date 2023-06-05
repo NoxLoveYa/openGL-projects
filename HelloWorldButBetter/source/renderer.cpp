@@ -24,21 +24,67 @@ Renderer::Renderer()
         -0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f// top left
     };
 
+    float cubeVertices[] = {
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+        0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+    };
+
     this->SHAPES_VERTICES.push_back({triangleVertices, sizeof(triangleVertices)});
     this->SHAPES_VERTICES.push_back({rectangleVertices, sizeof(rectangleVertices)});
+    this->SHAPES_VERTICES.push_back({cubeVertices, sizeof(cubeVertices)});
 
     //2D flat shader
-    Shader flat2D("source/shaders/source/simpleVertex2D.vert", "source/shaders/source/simpleFragment.frag");
+    Shader flat2D("source/shaders/source/simpleVertex2D.vert", "source/shaders/source/simpleFragment2D.frag");
     std::string flat2DId = "flat2D";
     this->SHADERS.push_back((shader_t){flat2DId.c_str(), flat2D});
 
     //3D flat shader
-    Shader flat3D("source/shaders/source/simpleVertex3D.vert", "source/shaders/source/simpleFragment.frag");
+    Shader flat3D("source/shaders/source/simpleVertex3D.vert", "source/shaders/source/simpleFragment3D.frag");
     std::string flat3DId = "flat3D";
     this->SHADERS.push_back((shader_t){flat3DId.c_str(), flat3D});
 
     this->SHAPES_VAO.push_back(getTriangleVao(this->SHAPES_VERTICES[TRIANGLE]));
     this->SHAPES_VAO.push_back(getRectangleVAO(this->SHAPES_VERTICES[RECTANGLE]));
+    this->SHAPES_VAO.push_back(getCubeVAO(this->SHAPES_VERTICES[CUBE]));
 
     this->TEXTURES.push_back(loadTexture("source/textures/source/brick_wall.jpg"));
     this->TEXTURES.push_back(loadTexture("source/textures/source/wood_container.jpg"));
