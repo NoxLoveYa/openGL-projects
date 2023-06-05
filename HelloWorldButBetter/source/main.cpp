@@ -7,10 +7,27 @@
 
 #include "include/main.hpp"
 
+Renderer *render;
+
 void processInput(GLFWwindow *window)
 {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+
+    float camSpeed = render->cameraSpeed * render->deltaTime;
+
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+        render->cameraPos += camSpeed * render->cameraFront;
+    }
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+        render->cameraPos -= camSpeed * render->cameraFront;
+    }
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+        render->cameraPos -= glm::normalize(glm::cross(render->cameraFront, render->cameraUp)) * camSpeed;
+    }
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+        render->cameraPos += glm::normalize(glm::cross(render->cameraFront, render->cameraUp)) * camSpeed;
+    }   
 }
 
 int main()
@@ -44,12 +61,20 @@ int main()
     glEnable(GL_DEPTH_TEST);
 
     Renderer ctx = Renderer();
+    render = &ctx;
+
+    ctx.fov = 60.0f;
 
     //wireframe mode
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
+    float lastFrame = 0.0f;
+
     while (!glfwWindowShouldClose(window))
     {
+        float currentFrame = glfwGetTime();
+        ctx.deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
         //process input
         processInput(window);
 
