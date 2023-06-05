@@ -34,7 +34,12 @@ unsigned int getTriangleVao(shape_t &shape)
 
 void Renderer::triangle()
 {
-    glUseProgram(SHADERS[0].shader.id);
+    glUseProgram(this->SHADERS[FLAT].shader.id);
+    this->SHADERS[FLAT].shader.setColor("Color", (Color){1.0f, 1.0f, 1.0f});
+    glm::mat4 trans = glm::mat4(1.0f);
+    trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+    trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+    this->SHADERS[TRIANGLE].shader.setTransform("transform", trans);
     glBindTexture(GL_TEXTURE_2D, TEXTURES[WOOD_CONTAINER]);
     glBindVertexArray(SHAPES_VAO[TRIANGLE]);
     glDrawArrays(GL_TRIANGLES, 0, SHAPES_VERTICES[TRIANGLE].size / sizeof(float) / 2);

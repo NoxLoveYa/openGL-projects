@@ -56,7 +56,7 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
         //draw stuff
-        ctx.triangle();
+        // ctx.triangle();
         ctx.rectangle();
 
         //check and call events and swap the buffers to prevent flickering

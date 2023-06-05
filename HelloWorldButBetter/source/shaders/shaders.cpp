@@ -108,6 +108,11 @@ void Shader::setColor(const std::string &name, Color color) const
     glUniform3f(glGetUniformLocation(this->id, name.c_str()), color.r, color.g, color.b);
 }
 
+void Shader::setTransform(const std::string &name, glm::mat4 transform) const
+{
+    glUniformMatrix4fv(glGetUniformLocation(this->id, name.c_str()), 1, GL_FALSE, glm::value_ptr(transform));
+}
+
 Color rainbow(float time)
 {
     float frequency = 0.5f;
