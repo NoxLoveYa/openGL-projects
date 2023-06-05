@@ -131,27 +131,16 @@ int main()
         processInput(window);
 
         //rendering commands here
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.f, 0.f, 0.f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        //draw stuff
-        // ctx.triangle();
-        // ctx.rectangle();
-        glm::vec3 cubePositions[] = {
-            glm::vec3( 0.0f,  0.0f,  0.0f),
-            glm::vec3( 2.0f,  5.0f, -15.0f),
-            glm::vec3(-1.5f, -2.2f, -2.5f),
-            glm::vec3(-3.8f, -2.0f, -12.3f),
-            glm::vec3( 2.4f, -0.4f, -3.5f),
-            glm::vec3(-1.7f,  3.0f, -7.5f),
-            glm::vec3( 1.3f, -2.0f, -2.5f),
-            glm::vec3( 1.5f,  2.0f, -2.5f),
-            glm::vec3( 1.5f,  0.2f, -1.5f),
-            glm::vec3(-1.3f,  1.0f, -1.5f)
-        };
-        for (int i = 0; i < 10; i++)
-            ctx.cube(cubePositions[i], i);
-        std::cout << "yaw: " << yaw << " pitch: " << pitch << std::endl;
+        Color color = {1.0f, 0.5f, 0.31f};
+        Color light_color = {1.0f, 1.0f, 1.0f};
+
+        //LightSource
+        ctx.cube(glm::vec3(1.2f, 1.0f, 2.0f), light_color, light_color, ctx.SHADERS[FLAT_LIGHT].shader);
+        //cubes
+        ctx.cube(glm::vec3(0.0f, 0.0f,  0.0f), color, light_color, ctx.SHADERS[FLAT3D].shader);
 
         //check and call events and swap the buffers to prevent flickering
         glfwSwapBuffers(window);

@@ -82,6 +82,11 @@ Renderer::Renderer()
     std::string flat3DId = "flat3D";
     this->SHADERS.push_back((shader_t){flat3DId.c_str(), flat3D});
 
+    //3D flat light shader
+    Shader flatLight("source/shaders/source/simpleVertexLightning.vert", "source/shaders/source/simpleFragmentLightning.frag");
+    std::string flatLightId = "flatLight";
+    this->SHADERS.push_back((shader_t){flatLightId.c_str(), flatLight});
+
     this->SHAPES_VAO.push_back(getTriangleVao(this->SHAPES_VERTICES[TRIANGLE]));
     this->SHAPES_VAO.push_back(getRectangleVAO(this->SHAPES_VERTICES[RECTANGLE]));
     this->SHAPES_VAO.push_back(getCubeVAO(this->SHAPES_VERTICES[CUBE]));

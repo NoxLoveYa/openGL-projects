@@ -28,30 +28,33 @@ unsigned int getCubeVAO(shape_t &shape)
     return VAO;
 }
 
-void Renderer::cube(glm::vec3 Position, int i)
+void Renderer::cube(glm::vec3 Position, Color color, Color light_color, Shader shader)
 {
-    this->SHADERS[FLAT3D].shader.use();
+    shader.use();
 
-    this->SHADERS[FLAT3D].shader.setColor("Color", rainbow(glfwGetTime()));
+    shader.setColor("Color", color);
+    shader.setColor("LightColor", light_color);
 
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
 
     model = glm::translate(model, Position);
-    float angle = 20.0f * i; 
-    model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+    if (shader.id == this->SHADERS[FLAT_LIGHT].shader.id)
+        model = glm::scale(model, glm::vec3(0.2f));
 
-    view = glm::lookAt(this->cameraPos, this->cameraPos + this->cameraFront, glm::vec3(0.0f, 1.0f, 0.0f));
+    view = glm::lookAt(this->cameraPos, this->cameraPos + this->cameraFront, this->cameraUp);
 
     projection = glm::perspective(glm::radians(this->fov), 1920.0f / 1080.0f, 0.1f, 100.0f);
 
-    this->SHADERS[FLAT3D].shader.setTransform("model", model);
-    this->SHADERS[FLAT3D].shader.setTransform("view", view);
-    this->SHADERS[FLAT3D].shader.setTransform("projection", projection);
+    shader.setTransform("model", model);
+    shader.setTransform("view", view);
+    shader.setTransform("projection", projection);
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, TEXTURES[WOOD_CONTAINER]);
+    if (shader.id != this->SHADERS[FLAT_LIGHT].shader.id) {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, TEXTURES[WOOD_CONTAINER]);
+    }
 
     glBindVertexArray(SHAPES_VAO[CUBE]);
     glDrawArrays(GL_TRIANGLES, 0, 36);

@@ -11,12 +11,12 @@ uniform mat4 projection;
 
 out vec3 color;
 out vec3 lightColor;
-out vec2 TexCoord;
+out vec2 texCoord;
 
 void main()
 {
     gl_Position = projection * view * model * vec4(aPos.xyz, 1.0);
     color = Color;
     lightColor = LightColor;
-    TexCoord = aTexCoord;
+    texCoord = aTexCoord;
 }
