@@ -5,7 +5,7 @@
 ## Makefile generator
 ##
 
-SRC = $(wildcard source/*.c source/*.cpp source/callbacks/*.cpp source/shapes/*.cpp source/shaders/*.cpp)
+SRC = $(wildcard source/*.c source/*.cpp source/callbacks/*.cpp source/shapes/*.cpp source/shaders/*.cpp source/textures/*.cpp)
 TARGET = hello_world
 
 all : $(TARGET)

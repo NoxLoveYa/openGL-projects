@@ -57,6 +57,7 @@ int main()
 
         //draw stuff
         ctx.triangle();
+        ctx.rectangle();
 
         //check and call events and swap the buffers to prevent flickering
         glfwSwapBuffers(window);

@@ -39,6 +39,7 @@ public:
 
     std::vector<shape_t> SHAPES_VERTICES;
     std::vector<unsigned int> SHAPES_VAO;
+    std::vector<unsigned int> TEXTURES;
     std::vector<shader_t> SHADERS;
 
     void triangle();

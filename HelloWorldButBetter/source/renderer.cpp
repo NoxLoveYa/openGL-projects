@@ -6,40 +6,26 @@
 */
 
 #include "include/main.hpp"
-#include "include/renderer.hpp"
-
 
 Renderer::Renderer()
 {
     float triangleVertices[] = {
-        // positions // colors
-        0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom right
-        -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,// bottom left
-        0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f // top
+        // positions // colors // texture coords
+        0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f,// bottom left
+        0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.5f, 1.0f // top
     };
 
     float rectangleVertices[] = {
-        0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,// top right
-        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,// bottom right
-        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,// bottom left
-        -0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f// top left
+        // positions // colors // texture coords
+        0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,// top right
+        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,// bottom right
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,// bottom left
+        -0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f// top left
     };
 
-    float triangleTexCoords[] = {
-        0.0f, 0.0f,  // lower-left corner  
-        1.0f, 0.0f,  // lower-right corner
-        0.5f, 1.0f   // top-center corner
-    };
-
-    float rectangleTexCoords[] = {
-        0.0f, 1.0f,  // top-left corner  
-        1.0f, 1.0f,  // top-right corner
-        1.0f, 0.0f,   // lower-right corner
-        0.0f, 0.0f   // lower-left corner
-    };
-
-    this->SHAPES_VERTICES.push_back({triangleVertices, sizeof(triangleVertices), triangleTexCoords});
-    this->SHAPES_VERTICES.push_back({rectangleVertices, sizeof(rectangleVertices), rectangleTexCoords});
+    this->SHAPES_VERTICES.push_back({triangleVertices, sizeof(triangleVertices)});
+    this->SHAPES_VERTICES.push_back({rectangleVertices, sizeof(rectangleVertices)});
 
     Shader flat("source/shaders/source/simpleVertex.vert", "source/shaders/source/simpleFragment.frag");
     std::string flatId = "flat";
@@ -48,6 +34,12 @@ Renderer::Renderer()
 
     this->SHAPES_VAO.push_back(getTriangleVao(this->SHAPES_VERTICES[TRIANGLE]));
     this->SHAPES_VAO.push_back(getRectangleVAO(this->SHAPES_VERTICES[RECTANGLE]));
+
+    this->TEXTURES.push_back(loadTexture("source/textures/source/brick_wall.jpg"));
+    this->TEXTURES.push_back(loadTexture("source/textures/source/wood_container.jpg"));
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
 Renderer::~Renderer()
