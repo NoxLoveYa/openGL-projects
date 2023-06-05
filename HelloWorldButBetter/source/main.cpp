@@ -7,6 +7,9 @@
 
 #include "include/main.hpp"
 
+const unsigned int SCR_WIDTH = 1920;
+const unsigned int SCR_HEIGHT = 1080;
+
 Renderer *render;
 
 void processInput(GLFWwindow *window)
@@ -30,6 +33,53 @@ void processInput(GLFWwindow *window)
     }   
 }
 
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+    render->fov -= (float)yoffset;
+    if (render->fov < 1.0f)
+        render->fov = 1.0f;
+    if (render->fov > 90.0f)
+        render->fov = 90.0f; 
+}
+
+
+float lastX = SCR_WIDTH / 2, lastY = SCR_HEIGHT / 2;
+bool firstMouse = true;
+float yaw = -89.0f, pitch = 0.0f;
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+    if (firstMouse)
+    {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
+  
+    float xoffset = xpos - lastX;
+    float yoffset = lastY - ypos; 
+    lastX = xpos;
+    lastY = ypos;
+
+    float sensitivity = 2.5f * render->deltaTime;
+    xoffset *= sensitivity;
+    yoffset *= sensitivity;
+
+    yaw += xoffset;
+    pitch += yoffset;
+
+    if(pitch > 89.0f)
+        pitch = 89.0f;
+    if(pitch < -89.0f)
+        pitch = -89.0f;
+
+    glm::vec3 direction;
+    direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    direction.y = sin(glm::radians(pitch));
+    direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    render->cameraFront = glm::normalize(direction);
+}  
+
 int main()
 {
     GLFWwindow *window;
@@ -41,7 +91,7 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(1920, 1080, "Hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -59,6 +109,8 @@ int main()
     register_callbacks(window);
 
     glEnable(GL_DEPTH_TEST);
+
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     Renderer ctx = Renderer();
     render = &ctx;
@@ -99,6 +151,7 @@ int main()
         };
         for (int i = 0; i < 10; i++)
             ctx.cube(cubePositions[i], i);
+        std::cout << "yaw: " << yaw << " pitch: " << pitch << std::endl;
 
         //check and call events and swap the buffers to prevent flickering
         glfwSwapBuffers(window);
