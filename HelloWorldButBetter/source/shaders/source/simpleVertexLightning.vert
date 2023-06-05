@@ -4,6 +4,7 @@ layout (location = 1) in vec2 aTexCoord;
 
 uniform vec3 Color;
 uniform vec3 LightColor;
+uniform vec3 LightPos;
 
 uniform mat4 model;
 uniform mat4 view;

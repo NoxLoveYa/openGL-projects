@@ -19,21 +19,28 @@ unsigned int getCubeVAO(shape_t &shape)
     glBufferData(GL_ARRAY_BUFFER, shape.size, shape.vertices, GL_STATIC_DRAW);
 
     // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     // texture coord attribute
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+    // texture coord attribute
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(5 * sizeof(float)));
+    glEnableVertexAttribArray(2);
 
     return VAO;
 }
 
-void Renderer::cube(glm::vec3 Position, Color color, Color light_color, Shader shader)
+void Renderer::cube(glm::vec3 Position, glm::vec3 lightPosition, Color color, Color light_color, Shader shader)
 {
     shader.use();
 
     shader.setColor("Color", color);
     shader.setColor("LightColor", light_color);
+
+    shader.setVec3("LightPos", lightPosition);
+
+    shader.setVec3("ViewPos", this->cameraPos);
 
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);

@@ -134,13 +134,15 @@ int main()
         glClearColor(0.f, 0.f, 0.f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        Color color = {1.0f, 0.5f, 0.31f};
-        Color light_color = {1.0f, 1.0f, 1.0f};
+        Color color = {1.0f, 1.f, 1.f};
+        Color light_color = {0.0f, 0.8f, 0.65f};
+
+        glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
         //LightSource
-        ctx.cube(glm::vec3(1.2f, 1.0f, 2.0f), light_color, light_color, ctx.SHADERS[FLAT_LIGHT].shader);
+        ctx.cube(lightPos, lightPos, light_color, light_color, ctx.SHADERS[FLAT_LIGHT].shader);
         //cubes
-        ctx.cube(glm::vec3(0.0f, 0.0f,  0.0f), color, light_color, ctx.SHADERS[FLAT3D].shader);
+        ctx.cube(glm::vec3(0.0f, 0.0f,  0.0f), lightPos, color, light_color, ctx.SHADERS[FLAT3D].shader);
 
         //check and call events and swap the buffers to prevent flickering
         glfwSwapBuffers(window);

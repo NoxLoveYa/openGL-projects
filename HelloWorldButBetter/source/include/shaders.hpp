@@ -41,6 +41,7 @@ public:
     void setFloat(const std::string &name, float value) const;
     void setColor(const std::string &name, Color color) const;
     void setTransform(const std::string &name, glm::mat4 transform) const;
+    void setVec3(const std::string &name, glm::vec3 vec) const;
 };
 
 Color rainbow(float time);
