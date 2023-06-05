@@ -44,5 +44,5 @@ public:
 
     void triangle();
     void rectangle();
-    void cube();
+    void cube(glm::vec3 Position, int i);
 };
